@@ -1,0 +1,24 @@
+{
+  "name": "v4test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lexusDev/v4test.git",
+  "author": "Alex Monteiro <alex.monteiro@digiage.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.3",
+    "@types/swagger-ui-express": "^4.1.6",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.2.2",
+    "swagger-ui-express": "^5.0.1",
+    "tsyringe": "^4.8.0",
+    "typeorm": "^0.3.20",
+    "uuid": "^10.0.0"
+  }
+}
