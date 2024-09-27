@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Product } from "../../modules/products/infra/typeorm/entities/Product";
+import { Product } from "@modules/products/infra/typeorm/entities/Product";
 
 const AppDataSource = new DataSource({
     type: "mysql",

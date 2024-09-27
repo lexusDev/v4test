@@ -1,17 +1,30 @@
+import { Repository } from "typeorm";
 import { AppDataSource } from "@shared/infra/typeorm";
 import { IProductsRepository } from "@modules/products/repositories/IProductsRepository";
 import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 import { Product } from "../entities/Product";
 
 class ProductsRepository implements IProductsRepository{
-    create(data: IProductsDTO): Promise<void> {
-        throw new Error("Method not implemented.");
+    private repository: Repository<Product>;
+
+    constructor() {
+        this.repository = AppDataSource.getRepository(Product);
     }
-    findById(id: string): Promise<Product> {
-        throw new Error("Method not implemented.");
+
+    async create(data: IProductsDTO): Promise<Product> {
+        const product = this.repository.create(data);
+        this.repository.save(product);
+
+        return product;
     }
-    find(): Promise<Product[]> {
-        throw new Error("Method not implemented.");
+    async findById(id: string): Promise<Product|null> {
+        const product = await this.repository.findOneBy({ id });
+        return product;
+    }
+
+    async find(): Promise<Product[]> {
+        const product = await this.repository.find();
+        return product;
     }
 
 }

@@ -5,7 +5,7 @@ import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 import { CreateProductUseCase } from "./CreateProductUseCase";
 
 export default class CreateProductController {
-    async handle(request: Request, response: Response): Promise<Response> {
+    async handle(request: Request, response: Response): Promise<Response|any> {
         const data:IProductsDTO = request.body;
 
         const createUserUseCase = container.resolve(CreateProductUseCase);
