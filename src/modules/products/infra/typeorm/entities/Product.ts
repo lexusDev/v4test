@@ -1,3 +1,4 @@
+import { Status } from "@modules/products/enums/Status";
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
 
 
@@ -7,8 +8,12 @@ class Product {
     @PrimaryGeneratedColumn()
     code?: number;
 
-    @Column()
-    status!: string;
+    @Column({
+        type: "enum",
+        enum: Status,
+        default: Status.DRAFT
+    })
+    status!: Status;
 
     @CreateDateColumn()
     imported_t!: Date;

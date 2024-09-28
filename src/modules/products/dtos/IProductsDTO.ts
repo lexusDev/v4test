@@ -1,6 +1,8 @@
+import { Status } from "../enums/Status";
+
 interface IProductsDTO {
     code?: number;
-    status: string;
+    status: Status;
     imported_t: Date;
     url: string;
     creator: string;

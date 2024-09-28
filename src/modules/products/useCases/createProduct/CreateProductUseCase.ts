@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 import { IProductsRepository } from "@modules/products/repositories/IProductsRepository";
 import { Product } from "@modules/products/infra/typeorm/entities/Product";
+import { Status } from "@modules/products/enums/Status";
 
 @injectable()
 class CreateProductUseCase {

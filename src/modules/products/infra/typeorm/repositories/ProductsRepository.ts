@@ -3,6 +3,7 @@ import { AppDataSource } from "@shared/infra/typeorm";
 import { IProductsRepository } from "@modules/products/repositories/IProductsRepository";
 import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 import { Product } from "../entities/Product";
+import { Status } from "@modules/products/enums/Status";
 
 class ProductsRepository implements IProductsRepository{
     private repository: Repository<Product>;
@@ -21,7 +22,11 @@ class ProductsRepository implements IProductsRepository{
     }
     
     async delete(code: number): Promise<void> {
-        this.repository.delete({ code });
+        this.repository.createQueryBuilder()
+        .update(Product)
+        .set({ status: Status.TRASH })
+        .where("code = :code", { code })
+        .execute();
     }
 
     async create(data: IProductsDTO): Promise<Product> {
