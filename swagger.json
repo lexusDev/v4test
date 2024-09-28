@@ -124,8 +124,33 @@
               }
             }
           },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
           "404": {
-            "description": "Product not found"
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
           }
         }
       },
@@ -191,8 +216,33 @@
               }
             }
           },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
           "404": {
-            "description": "Product not found"
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
           }
         }
       },
@@ -213,8 +263,33 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
           "404": {
-            "description": "Product not found"
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
           }
         }
       }
@@ -350,6 +425,17 @@
           "image_url": {
             "type": "string",
             "format": "uri"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message":{
+            "type": "string"
+          },
+          "status":{
+            "type": "integer"
           }
         }
       }
