@@ -1,18 +1,25 @@
 import { ProductsRepositoryInMemory } from "@modules/products/repositories/in-memory/ProductsRepositoryInMemory";
-import { CreateProductUseCase } from "./CreateProductUseCase";
+import { DeleteProductUseCase } from "./DeleteProductUseCase";
 import { Status } from "@modules/products/enums/Status";
-
+import { CreateProductUseCase } from "../createProduct/CreateProductUseCase";
+import { RetrieveProductUseCase } from "../retrieveProduct/RetrieveProductUseCase";
+import { AppError } from "@shared/errors/AppError";
 
 let createProductUseCase: CreateProductUseCase;
+let deleteProductUseCase: DeleteProductUseCase;
+let retrieveProductUseCase :RetrieveProductUseCase;
 let productsRepositoryInMemory: ProductsRepositoryInMemory;
 
-describe("Creating product", () => {
+describe("Deleting product", () => {
     beforeEach(() => {
         productsRepositoryInMemory = new ProductsRepositoryInMemory();
+        deleteProductUseCase = new DeleteProductUseCase(productsRepositoryInMemory);
         createProductUseCase = new CreateProductUseCase(productsRepositoryInMemory);
+        retrieveProductUseCase = new RetrieveProductUseCase(productsRepositoryInMemory);
     });
 
-    it("Should be able to create a new product", async () => {
+    it("Should be able to update a product to trash", async () => {
+        
         const product = await createProductUseCase.execute({
             brands: "string",
             categories: "string",
@@ -38,6 +45,16 @@ describe("Creating product", () => {
             image_url: "string"
         });
 
-        expect(product).toHaveProperty("brands");
+        await deleteProductUseCase.execute(1);
+
+        const trashProduct = await retrieveProductUseCase.execute(Number(product.code));
+
+        expect(trashProduct.status).toBe(Status.TRASH);
+    });
+
+    it("Should not be able to update a product to trash", async () => {
+        expect(async () => {
+            await deleteProductUseCase.execute(1);
+        }).rejects.toBeInstanceOf(AppError);
     });
 });

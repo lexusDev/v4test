@@ -1,19 +1,22 @@
 import { ProductsRepositoryInMemory } from "@modules/products/repositories/in-memory/ProductsRepositoryInMemory";
-import { CreateProductUseCase } from "./CreateProductUseCase";
 import { Status } from "@modules/products/enums/Status";
-
+import { CreateProductUseCase } from "../createProduct/CreateProductUseCase";
+import { ListProductUseCase } from "./ListProductUseCase";
 
 let createProductUseCase: CreateProductUseCase;
+let listProductUseCase :ListProductUseCase;
 let productsRepositoryInMemory: ProductsRepositoryInMemory;
 
-describe("Creating product", () => {
+describe("Retrieving product", () => {
     beforeEach(() => {
         productsRepositoryInMemory = new ProductsRepositoryInMemory();
         createProductUseCase = new CreateProductUseCase(productsRepositoryInMemory);
+        listProductUseCase = new ListProductUseCase(productsRepositoryInMemory);
     });
 
-    it("Should be able to create a new product", async () => {
-        const product = await createProductUseCase.execute({
+    it("Should be able to retrieve a product by code", async () => {
+        
+        await createProductUseCase.execute({
             brands: "string",
             categories: "string",
             status: Status.DRAFT,
@@ -38,6 +41,8 @@ describe("Creating product", () => {
             image_url: "string"
         });
 
-        expect(product).toHaveProperty("brands");
+        const retrievedProduct = await listProductUseCase.execute();
+
+        expect(retrievedProduct[0]).toHaveProperty("code");
     });
 });

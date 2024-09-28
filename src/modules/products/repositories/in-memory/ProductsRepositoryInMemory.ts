@@ -1,6 +1,7 @@
 import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 import { Product } from "@modules/products/infra/typeorm/entities/Product";
 import { IProductsRepository } from "../IProductsRepository";
+import { Status } from "@modules/products/enums/Status";
 
 class ProductsRepositoryInMemory implements IProductsRepository{
     products: Product[] = [];
@@ -56,6 +57,12 @@ class ProductsRepositoryInMemory implements IProductsRepository{
             url
         });
 
+        if (this.products.length === 0)
+            product.code = 1
+        else
+            product.code = this.products.length + 1;
+
+
         this.products.push(product);
 
         return product;
@@ -66,7 +73,11 @@ class ProductsRepositoryInMemory implements IProductsRepository{
     }
 
     async delete(code: number): Promise<void> {
-        throw new Error("Method not implemented.");
+        this.products.forEach((product) => {
+            if (product.code === code) {
+                product.status = Status.TRASH
+            }
+        });
     }
 
     async find(): Promise<Product[]> {

@@ -1,18 +1,22 @@
 import { ProductsRepositoryInMemory } from "@modules/products/repositories/in-memory/ProductsRepositoryInMemory";
-import { CreateProductUseCase } from "./CreateProductUseCase";
 import { Status } from "@modules/products/enums/Status";
-
+import { CreateProductUseCase } from "../createProduct/CreateProductUseCase";
+import { RetrieveProductUseCase } from "./RetrieveProductUseCase";
+import { AppError } from "@shared/errors/AppError";
 
 let createProductUseCase: CreateProductUseCase;
+let retrieveProductUseCase :RetrieveProductUseCase;
 let productsRepositoryInMemory: ProductsRepositoryInMemory;
 
-describe("Creating product", () => {
+describe("Retrieving product", () => {
     beforeEach(() => {
         productsRepositoryInMemory = new ProductsRepositoryInMemory();
         createProductUseCase = new CreateProductUseCase(productsRepositoryInMemory);
+        retrieveProductUseCase = new RetrieveProductUseCase(productsRepositoryInMemory);
     });
 
-    it("Should be able to create a new product", async () => {
+    it("Should be able to retrieve a product by code", async () => {
+        
         const product = await createProductUseCase.execute({
             brands: "string",
             categories: "string",
@@ -38,6 +42,20 @@ describe("Creating product", () => {
             image_url: "string"
         });
 
-        expect(product).toHaveProperty("brands");
+        const retrievedProduct = await retrieveProductUseCase.execute(Number(product.code));
+
+        expect(retrievedProduct).toHaveProperty("code");
+    });
+
+    it("Should not be able to retrieve a product from unexistent code", async () => {
+        expect(async () => {
+            await retrieveProductUseCase.execute(1);
+        }).rejects.toBeInstanceOf(AppError);
+    });
+
+    it("Should not be able to retrive a product from invalid value", async () => {
+        expect(async () => {
+            await retrieveProductUseCase.execute(Number("asd"));
+        }).rejects.toBeInstanceOf(AppError);
     });
 });
