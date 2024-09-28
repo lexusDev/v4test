@@ -92,7 +92,12 @@ class ProductsRepositoryInMemory implements IProductsRepository{
     }
 
     async update(code: number, data: IProductsDTO): Promise<Product> {
-        throw new Error("Method not implemented.");
+        const product = this.products.filter((product) => {
+            if (product.code === code)
+                Object.assign(product, data)
+        });
+
+        return product[0];
     }
 
 }

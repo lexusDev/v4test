@@ -11,8 +11,8 @@ class ListProductUseCase {
         private productsRepository: IProductsRepository
     ) {}
 
-    async execute(): Promise<Product[]> {
-        const product = this.productsRepository.find();
+    async execute(page: number|any, limit: number|any): Promise<Product[]> {
+        const product = this.productsRepository.find(page, limit);
         return product;
     }
 }

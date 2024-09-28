@@ -40,8 +40,12 @@ class ProductsRepository implements IProductsRepository{
         return product;
     }
 
-    async find(): Promise<Product[]> {
-        const product = await this.repository.find();
+    async find(page = 1, limit = 10): Promise<Product[]> {
+        const product = this.repository.createQueryBuilder()
+            .select()
+            .limit(limit)
+            .offset((page -1) * limit)
+            .getMany();
         return product;
     }
 

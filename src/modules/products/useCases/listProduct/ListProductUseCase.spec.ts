@@ -41,7 +41,7 @@ describe("Retrieving product", () => {
             image_url: "string"
         });
 
-        const retrievedProduct = await listProductUseCase.execute();
+        const retrievedProduct = await listProductUseCase.execute(1, 10);
 
         expect(retrievedProduct[0]).toHaveProperty("code");
     });
