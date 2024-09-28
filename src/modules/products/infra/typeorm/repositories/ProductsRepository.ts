@@ -11,14 +11,27 @@ class ProductsRepository implements IProductsRepository{
         this.repository = AppDataSource.getRepository(Product);
     }
 
+    async update(code: number, data: IProductsDTO): Promise<Product|any> {
+        const product = await this.repository.update(code, data);
+        return product;
+    }
+
+    async exists(code: number): Promise<boolean> {
+        return this.repository.existsBy({ code });
+    }
+    
+    async delete(code: number): Promise<void> {
+        this.repository.delete({ code });
+    }
+
     async create(data: IProductsDTO): Promise<Product> {
         const product = this.repository.create(data);
         this.repository.save(product);
 
         return product;
     }
-    async findById(id: string): Promise<Product|null> {
-        const product = await this.repository.findOneBy({ id });
+    async findByCode(code: number): Promise<Product|null> {
+        const product = await this.repository.findOneBy({ code });
         return product;
     }
 

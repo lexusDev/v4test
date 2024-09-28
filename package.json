@@ -5,15 +5,25 @@
   "repository": "https://github.com/lexusDev/v4test.git",
   "author": "Alex Monteiro <alex.monteiro@digiage.com.br>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
+    "start": "node dist/src/shared/infra/http/server.js"
+  },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.3",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/uuid": "^10.0.0",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^5.6.2"
   },
   "dependencies": {
     "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",

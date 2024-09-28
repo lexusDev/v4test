@@ -7,11 +7,12 @@ const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "admin",
-    database: "test",
+    password: "v7A117o%",
+    database: "v4test",
     entities: [Product],
     synchronize: true,
     logging: false,
+    migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
 });
 
 export { AppDataSource };

@@ -4,11 +4,8 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeor
 @Entity("products")
 class Product {
 
-    @PrimaryGeneratedColumn("uuid")
-    id?: string;
-
-    @Column()
-    code!: number;
+    @PrimaryGeneratedColumn()
+    code?: number;
 
     @Column()
     status!: string;
@@ -61,7 +58,7 @@ class Product {
     @Column()
     serving_size!: string;
 
-    @Column()
+    @Column('decimal', { precision: 6, scale: 2 })
     serving_quantity!: number;
 
     @Column()

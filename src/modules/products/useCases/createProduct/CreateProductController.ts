@@ -3,15 +3,16 @@ import { container } from "tsyringe";
 import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 
 import { CreateProductUseCase } from "./CreateProductUseCase";
+import { Product } from "@modules/products/infra/typeorm/entities/Product";
 
 export default class CreateProductController {
-    async handle(request: Request, response: Response): Promise<Response|any> {
+    async handle(request: Request, response: Response): Promise<Response<Product>|any> {
         const data:IProductsDTO = request.body;
 
         const createUserUseCase = container.resolve(CreateProductUseCase);
 
-        await createUserUseCase.execute(data);
+        const product = await createUserUseCase.execute(data);
 
-        return response.status(201).send();
+        return response.status(201).send(product);
     }
 }

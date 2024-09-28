@@ -1,6 +1,5 @@
 interface IProductsDTO {
-    id?: string;
-    code: number;
+    code?: number;
     status: string;
     imported_t: Date;
     url: string;
