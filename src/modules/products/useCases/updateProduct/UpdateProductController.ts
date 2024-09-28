@@ -19,6 +19,6 @@ export default class UpdateProductController {
 
         await updateProductUseCase.execute(Number(code), data);
 
-        return response.status(204).send();
+        return response.status(200).send();
     }
 }

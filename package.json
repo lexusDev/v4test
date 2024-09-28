@@ -9,12 +9,14 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
+    "test": "NODE_ENV=test jest",
     "start": "node dist/src/shared/infra/http/server.js"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.7.3",
+    "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/uuid": "^10.0.0",
     "ts-node-dev": "^2.0.0",
@@ -28,6 +30,7 @@
     "jest": "^29.7.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.2.2",
+    "supertest": "^7.0.0",
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.2.5",
     "tsyringe": "^4.8.0",
