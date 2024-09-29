@@ -20,8 +20,8 @@ describe("Create Category Controller", () => {
     await AppDataSource.destroy(); // Close the connection
   });
 
-  it("Should be able to create a new product ", async () => {
-    const response = await request(app).post("/products").send({
+  it("Should be able to update a product ", async () => {
+    await request(app).post("/products").send({
         brands: "string",
         categories: "string",
         status: Status.DRAFT,
@@ -46,6 +46,31 @@ describe("Create Category Controller", () => {
         image_url: "string"
     });
 
-    expect(response.status).toBe(201);
+    const response = await request(app).put(`/products/${1}`).send({
+        brands: "string",
+        categories: "string",
+        status: Status.PUBLISHED,
+        imported_t: new Date(),
+        url: "string",
+        creator: "string",
+        created_t: 0,
+        last_modified_t: 0,
+        product_name: "string",
+        quantity: "string",
+        labels: "string",
+        cities: "string",
+        purchase_places: "string",
+        stores: "",
+        ingredients_text: "string",
+        traces: "string",
+        serving_size: "string",
+        serving_quantity: 0,
+        nutriscore_score: 0,
+        nutriscore_grade: "string",
+        main_category: "string",
+        image_url: "string"
+    });
+
+    expect(response.status).toBe(200);
   });
 });

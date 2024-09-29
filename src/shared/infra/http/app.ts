@@ -12,7 +12,7 @@ import { errorHandler } from "@shared/infra/http/middlewares/errorHandler";
 import swaggerFile from "../../../../swagger.json";
 import { AppDataSource } from "@shared/infra/typeorm";
 
-AppDataSource.initialize();
+if (process.env.NODE_ENV !== 'test') AppDataSource.initialize();
 
 const app = express();
 app.use(express.json());

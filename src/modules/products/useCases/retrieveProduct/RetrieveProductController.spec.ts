@@ -20,8 +20,8 @@ describe("Create Category Controller", () => {
     await AppDataSource.destroy(); // Close the connection
   });
 
-  it("Should be able to create a new product ", async () => {
-    const response = await request(app).post("/products").send({
+  it("Should be able to retrieve a product ", async () => {
+    await request(app).post("/products").send({
         brands: "string",
         categories: "string",
         status: Status.DRAFT,
@@ -46,6 +46,9 @@ describe("Create Category Controller", () => {
         image_url: "string"
     });
 
-    expect(response.status).toBe(201);
+    const response = await request(app).get(`/products/${1}`).send();
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("code");
   });
 });

@@ -31,9 +31,9 @@ class ProductsRepository implements IProductsRepository{
 
     async create(data: IProductsDTO): Promise<Product> {
         const product = this.repository.create(data);
-        this.repository.save(product);
+        const savedProduct = this.repository.save(product);
 
-        return product;
+        return savedProduct;
     }
     async findByCode(code: number): Promise<Product|null> {
         const product = await this.repository.findOneBy({ code });

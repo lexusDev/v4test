@@ -9,6 +9,8 @@ export const errorHandler = (err: Error, request: Request, response: Response, n
         });
     }
 
+    console.log("STACK = " + err.stack);
+
     return response.status(500).json({
         message: `Internal server error - ${err.message}`,
         status: 'error'
