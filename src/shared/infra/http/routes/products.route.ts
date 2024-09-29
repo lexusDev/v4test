@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 
 import CreateProductController from "@modules/products/useCases/createProduct/CreateProductController";
 import ListProductController from "@modules/products/useCases/listProduct/ListProductController";
@@ -7,6 +8,9 @@ import RetrieveProductController from "@modules/products/useCases/retrieveProduc
 import UpdateProductController from "@modules/products/useCases/updateProduct/UpdateProductController";
 
 const productRoutes = Router();
+const upload = multer({
+    dest: "./tmp",
+  });
 
 const createProductController = new CreateProductController();
 const listProductController = new ListProductController();
@@ -19,6 +23,11 @@ productRoutes.get("/", listProductController.handle);
 productRoutes.delete("/:code", deleteProductController.handle);
 productRoutes.get("/:code", retrieveProductController.handle);
 productRoutes.put("/:code", updateProductController.handle);
+productRoutes.post(
+    "/import",
+    upload.single("file"),
+    importCategoryController.handle
+);
 
 
 export { productRoutes };
