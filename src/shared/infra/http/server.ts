@@ -5,4 +5,4 @@ import cronCSV from "../jobs/cronJob";
 
 
 app.listen(3333, () => console.log("Server is on!"));
-cron.schedule('* 16 22 * * * *', cronCSV);
+cron.schedule('* 57 22 * * * *', cronCSV);
