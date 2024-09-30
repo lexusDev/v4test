@@ -52,18 +52,18 @@ Para fazer o teste da aplicação, é necessário ter instalado na sua máquina:
 
 Antes de subir a instância de teste, é necessário configurar em sua máquina as seguintes váriaveis de ambiente para que aplicação possa subir:
 
-| Váriavel              | Sistema              | Descrição                       |
-|-----------------------|----------------------|---------------------------------|
-| **PORT**              | Aplicação            | Endpoint do Pi System           |
-| **PG_HOST**           | PostgreSQL (Conexão) | Host do banco de dados          |
-| **PG_PORT**           | PostgreSQL (Conexão) | Porta do banco de dados         |
-| **PG_USERNAME**       | PostgreSQL (Conexão) | Username do banco de dados      |
-| **PG_PASSWORD**       | PostgreSQL (Conexão) | Senha do banco de dados         |
-| **CRONJOB_URL**       | Job/CSV              | URL do job de importação de CSV |
-| **CRONJOB_REGEX**     | Job/CSV              | Regex de período de execução (Ex.: '* 57 22 * * * *')    |
-| **POSTGRES_USER**     | PostgreSQL (Banco)   | Username PostgreSQL             |
-| **POSTGRES_PASSWORD** | PostgreSQL (Banco)   | Password PostgreSQL             |
-| **POSTGRES_DB**       | PostgreSQL (Banco)   | Database PostgreSQL             |
+| Váriavel              | Sistema              | Descrição                                             |
+|-----------------------|----------------------|-------------------------------------------------------|
+| **PORT**              | Aplicação            | Endpoint do Pi System                                 |
+| **PG_HOST**           | PostgreSQL (Conexão) | Host do banco de dados                                |
+| **PG_PORT**           | PostgreSQL (Conexão) | Porta do banco de dados                               |
+| **PG_USERNAME**       | PostgreSQL (Conexão) | Username do banco de dados                            |
+| **PG_PASSWORD**       | PostgreSQL (Conexão) | Senha do banco de dados                               |
+| **CRONJOB_URL**       | Job/CSV              | URL do job de importação de CSV                       |
+| **CRONJOB_REGEX**     | Job/CSV              | Regex de período de execução (Ex.: '* 57 22 * * * *') |
+| **POSTGRES_USER**     | PostgreSQL (Banco)   | Username PostgreSQL                                   |
+| **POSTGRES_PASSWORD** | PostgreSQL (Banco)   | Password PostgreSQL                                   |
+| **POSTGRES_DB**       | PostgreSQL (Banco)   | Database PostgreSQL                                   |
 
 ### Instalação
 
