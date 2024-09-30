@@ -7,7 +7,7 @@ import { IProductsDTO } from "@modules/products/dtos/IProductsDTO";
 
 
 export default class UpdateProductController {
-    async handle(request: Request, response: Response): Promise<Response> {
+    async handle(request: Request, response: Response): Promise<Response|any> {
         const { code } = request.params;
         const data:IProductsDTO = request.body;
 

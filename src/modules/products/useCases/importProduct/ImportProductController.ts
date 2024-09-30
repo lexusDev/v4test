@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 import { ImportProductUseCase } from "./ImportProductUseCase";
 
 export default class ImportProductController {
-    async handle(request: Request, response: Response): Promise<Response> {
+    async handle(request: Request, response: Response): Promise<Response|any> {
         const { file } = request;
 
         const importProductUseCase = container.resolve(ImportProductUseCase);

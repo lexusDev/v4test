@@ -9,7 +9,7 @@ import "@shared/container";
 import { router } from "@shared/infra/http/routes";
 import { errorHandler } from "@shared/infra/http/middlewares/errorHandler";
 
-import swaggerFile from "../../../../swagger.json";
+import swaggerFile from "../../../../openapi.json";
 import { AppDataSource } from "@shared/infra/typeorm";
 
 if (process.env.NODE_ENV !== 'test') AppDataSource.initialize();
