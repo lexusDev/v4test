@@ -1,13 +1,15 @@
-FROM node:16
+FROM node:latest
 
 WORKDIR /usr/app
 
-COPY . .
+COPY package.json ./
 
 RUN yarn install
 
-RUN yarn build
+COPY . .
 
-EXPOSE 80
+USER 10014
 
-CMD ["yarn", "start"]
+EXPOSE 3333
+
+CMD ["npm", "run", "dev"]
