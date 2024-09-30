@@ -5,7 +5,7 @@ export default async function cronCSV () {
     const importProductUrlUseCase = container.resolve(ImportProductUrlUseCase);
 
     try {
-        await importProductUrlUseCase.execute(String("https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv"));
+        await importProductUrlUseCase.execute(String(process.env.CRONJOB_URL));
     } catch (error) {
         console.error('Error downloading CSV:', error);
     }
