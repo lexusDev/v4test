@@ -137,13 +137,13 @@ Para fazer a configuração correta do Node Cron, segue como realizar o regex:
  # * * * * * *
 ```
 
-| Campo         | Valor                             |
-|---------------|-----------------------------------|
-| segundo       | 0-59                              |
-| minuto        | 0-59                              |
-| hora          | 0-23                              |
-| dia do mês    | 1-31                              |
-| mês           | 1-12 (or names)                   |
-| dia da semana | 0-7 (or names, 0 or 7 are sunday) |
+| Campo         | Valor                              |
+|---------------|------------------------------------|
+| segundo       | 0-59                               |
+| minuto        | 0-59                               |
+| hora          | 0-23                               |
+| dia do mês    | 1-31                               |
+| mês           | 1-12 (ou nomes)                    |
+| dia da semana | 0-7 (ou nomes, 0 ou 7 são domingo) |
 
 *Mais detalhes da documentação se encontram em [Node Cron](https://www.npmjs.com/package/node-cron)*
