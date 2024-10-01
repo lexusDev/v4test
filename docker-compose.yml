@@ -34,6 +34,7 @@ services:
       - PG_USERNAME=${PG_USERNAME}
       - PG_PASSWORD=${PG_PASSWORD}
       - CRONJOB_URL=${CRONJOB_URL}
+      - CRONJOB_REGEX=${CRONJOB_REGEX}
 
 volumes:
   pgdata:
