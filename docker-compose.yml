@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    container_name: database_v4
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: v4test
+    restart: always
+    ports: 
+      - 3333:3333
+      - 9229:9229
+    volumes: 
+      - .:/usr/app
+    links: 
+      - database
+    depends_on:
+      - database
+    environment:
+      - PORT=${PORT}
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - PG_USERNAME=${PG_USERNAME}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - CRONJOB_URL=${CRONJOB_URL}
+      - CRONJOB_REGEX=${CRONJOB_REGEX}
+
+volumes:
+  pgdata:
+    driver: local

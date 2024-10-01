@@ -1,0 +1,504 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Product API",
+    "version": "1.0.0",
+    "description": "API for managing products"
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Retrieve all products",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Number of page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              },
+              "examples": {
+                "example-1": {
+                  "summary": "Example product",
+                  "value": {
+                    "status": "published",
+                    "product_name": "Madalenas quadradas",
+                    "quantity": "380 g (6 x 2 u.)",
+                    "brands": "La Cestera",
+                    "categories": "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas",
+                    "labels": "Contem gluten, Contém derivados de ovos, Contém ovos",
+                    "purchase_places": "Braga, Portugal",
+                    "stores": "Lidl",
+                    "ingredients_text": "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma",
+                    "traces": "Frutos de casca rija, Leite, Soja, Sementes de sésamo, Produtos à base de sementes de sésamo",
+                    "serving_size": "madalena 31.7 g",
+                    "serving_quantity": 31.7,
+                    "nutriscore_score": 17,
+                    "nutriscore_grade": "d",
+                    "main_category": "en:madeleines",
+                    "image_url": "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Product created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{code}": {
+      "get": {
+        "summary": "Retrieve a product by code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "Product code",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "code": 20221126,
+                  "status": "published",
+                  "imported_t": "2020-02-07T16:00:00Z",
+                  "url": "https://world.openfoodfacts.org/product/20221126",
+                  "creator": "securita",
+                  "created_t": 1415302075,
+                  "last_modified_t": 1572265837,
+                  "product_name": "Madalenas quadradas",
+                  "quantity": "380 g (6 x 2 u.)",
+                  "brands": "La Cestera",
+                  "categories": "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas",
+                  "labels": "Contem gluten, Contém derivados de ovos, Contém ovos",
+                  "cities": "",
+                  "purchase_places": "Braga, Portugal",
+                  "stores": "Lidl",
+                  "ingredients_text": "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma",
+                  "traces": "Frutos de casca rija, Leite, Soja, Sementes de sésamo, Produtos à base de sementes de sésamo",
+                  "serving_size": "madalena 31.7 g",
+                  "serving_quantity": 31.7,
+                  "nutriscore_score": 17,
+                  "nutriscore_grade": "d",
+                  "main_category": "en:madeleines",
+                  "image_url": "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a product by code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "Product code",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              },
+              "examples": {
+                "example-1": {
+                  "summary": "Update example product",
+                  "value": {
+                    "status": "published",
+                    "product_name": "Madalenas quadradas - Updated",
+                    "quantity": "380 g (6 x 2 u.)",
+                    "brands": "La Cestera",
+                    "categories": "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas",
+                    "labels": "Contem gluten, Contém derivados de ovos, Contém ovos",
+                    "purchase_places": "Braga, Portugal",
+                    "stores": "Lidl",
+                    "ingredients_text": "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma",
+                    "traces": "Frutos de casca rija, Leite, Soja, Sementes de sésamo, Produtos à base de sementes de sésamo",
+                    "serving_size": "madalena 31.7 g",
+                    "serving_quantity": 31.7,
+                    "nutriscore_score": 17,
+                    "nutriscore_grade": "d",
+                    "main_category": "en:madeleines",
+                    "image_url": "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "code": 20221126,
+                  "status": "published",
+                  "product_name": "Madalenas quadradas - Updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a product by code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "Product code",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "The value passed is invalid!",
+                  "status": "error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Product does not exist!",
+                  "status": "error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/import": {
+      "post": {
+        "summary": "Upload a new product",
+        "description": "Upload a new product",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorMessage"
+                },
+                "example": {
+                  "message": "Internal Server Error",
+                  "status": "error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "imported_t": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "creator": {
+            "type": "string"
+          },
+          "created_t": {
+            "type": "integer"
+          },
+          "last_modified_t": {
+            "type": "integer"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "brands": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "string"
+          },
+          "cities": {
+            "type": "string"
+          },
+          "purchase_places": {
+            "type": "string"
+          },
+          "stores": {
+            "type": "string"
+          },
+          "ingredients_text": {
+            "type": "string"
+          },
+          "traces": {
+            "type": "string"
+          },
+          "serving_size": {
+            "type": "string"
+          },
+          "serving_quantity": {
+            "type": "number"
+          },
+          "nutriscore_score": {
+            "type": "integer"
+          },
+          "nutriscore_grade": {
+            "type": "string"
+          },
+          "main_category": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "ProductInput": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "brands": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "string"
+          },
+          "purchase_places": {
+            "type": "string"
+          },
+          "stores": {
+            "type": "string"
+          },
+          "ingredients_text": {
+            "type": "string"
+          },
+          "traces": {
+            "type": "string"
+          },
+          "serving_size": {
+            "type": "string"
+          },
+          "serving_quantity": {
+            "type": "number"
+          },
+          "nutriscore_score": {
+            "type": "integer"
+          },
+          "nutriscore_grade": {
+            "type": "string"
+          },
+          "main_category": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
